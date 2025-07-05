@@ -1,41 +1,29 @@
 org  0x100               ; Вказуємо, що це програма .COM
-
 section .data
-    a db 9              
     b db 6              
-    c db 2              
-    resultMsg db 'Result: $'  ; Визначення рядка для виведення результату
+    c db 2             
+    a db 4               
+    resultMsg db 'Result: $' ; Визначення рядка для виведення результату
 
 section .text
 _start:
-    ; Обчислення: b - c + a
-    mov al, [b]          ; b
-    sub al, [c]          ; b - c
-    add al, [a]          ; b - c + a
+    mov al, [b]          
+    sub al, [c]        
+    add al, [a]         
 
-    ; Перетворюємо число на десятки та одиниці
-    mov bl, 10
-    xor ah, ah         
-    div bl             
+    ; Перетворення результату в ASCII символ (для однозначних чисел)
+    add al, 30h          ; Перетворюємо число в ASCII символ
 
-    ; Виведення "Result: "
-    mov ah, 09h
-    lea dx, [resultMsg]
-    int 21h
+    ; Виведення результату
+    mov ah, 09h          ; Функція DOS для виведення рядка
+    lea dx, resultMsg    ; Встановлюємо DX на адресу resultMsg
+    int 21h              ; Виклик DOS-переривання
 
-    ; Виводимо першу цифру
-    add al, '0'
-    mov dl, al
-    mov ah, 02h
-    int 21h
-
-    ; Виводимо другу цифру
-    mov al, ah         
-    add al, '0'
-    mov dl, al
-    mov ah, 02h
-    int 21h
+    ; Виведення числа
+    mov dl, al           ; Поміщаємо результат в dl для виводу
+    mov ah, 02h          ; Функція DOS для виводу символу
+    int 21h              ; Виклик DOS-переривання
 
     ; Завершення програми
-    mov ax, 4c00h
-    int 21h
+    mov ax, 4c00h        ; Функція DOS для завершення програми
+    int 21h  
