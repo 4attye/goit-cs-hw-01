@@ -1,8 +1,8 @@
 org  0x100               ; Вказуємо, що це програма .COM
 section .data
+    a db 4
     b db 6              
-    c db 2             
-    a db 4               
+    c db 2                          
     resultMsg db 'Result: $' ; Визначення рядка для виведення результату
 
 section .text
