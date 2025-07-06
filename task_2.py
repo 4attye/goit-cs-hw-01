@@ -46,7 +46,7 @@ class Lexer:
         """ Збираємо послідовність цифр, яка представляє число."""
         result = ''
         has_dot = False
-        while self.current_char is not None and self.current_char.isdigit() or self.current_char == '.':
+        while self.current_char is not None and (self.current_char.isdigit() or self.current_char == '.'):
             if self.current_char == '.':
                 if has_dot:
                     raise LexicalError('Помилка лексичного аналізу: зайва крапка в числі')
